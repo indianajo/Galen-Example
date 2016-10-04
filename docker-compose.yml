@@ -1,0 +1,18 @@
+selenium-hub:
+  image: selenium/hub
+  ports:
+    - 4444:4444
+
+firefox:
+  image: oldjoe/node-firefox
+  ports:
+    - 5900
+  links:
+    - selenium-hub:hub
+
+chrome:
+  image: oldjoe/node-chrome
+  ports:
+    - 5900
+  links:
+    - selenium-hub:hub
