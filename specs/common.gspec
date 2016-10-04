@@ -1,0 +1,36 @@
+@import rules/rules.gspec
+
+
+@objects
+    navbar                  div.navbar
+    main-nav                div.main-menu
+    mobile-nav              div.mobile-header
+    logo                    a.header__logo
+    main-nav-menu           ul.header__menu
+    main-nav-menu-item-*    ul.header__menu li
+    priority-nav            div.priority-navigation
+    all-topics              div.all_topics
+    channels                div.channels_nav--top-channels
+
+
+
+= Header section =
+    @on desktop
+        | navbar should be above main-nav
+        | main-nav should be above priority-nav and vertically aligned centered
+        | main-nav-menu should be right of logo
+        | mobile-nav should not be visible
+        | main-nav-menu-item-* should be displayed next to each other and horizontally aligned
+    @on desktop, tablet
+        | channels should be visible
+    @on tablet, mobile
+        | navbar should not be visible
+        | main-nav should not be visible
+        | mobile-nav should be visible
+        | mobile-nav should be above priority-nav
+    @on mobile
+        | channels should not be visible
+        | all-topics should be centered horizontally inside screen
+
+
+    

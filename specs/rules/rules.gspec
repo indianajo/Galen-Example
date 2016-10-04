@@ -1,0 +1,339 @@
+@if ${this.NO_MARGIN === undefined || this.NO_MARGIN === null}
+    @set NO_MARGIN  -2px
+################################################################################################
+# Check that object is visible
+# e.g.
+# | banner should be visible
+################################################################################################
+@rule %{objectName} should be visible
+    ${objectName}:
+        visible
+
+
+################################################################################################
+# Check that object is not visible
+# e.g.
+# | banner should not be visible
+################################################################################################
+@rule %{objectName} should not be visible
+    ${objectName}:
+        absent
+
+
+
+################################################################################################
+# Check if object is visible, if yes then invoke ruleBody
+# e.g.
+# | if banner is visible
+#     | banner is above abstract
+################################################################################################
+@rule if %{objectName} is visible
+    @if ${isVisible(objectName)}
+        @ruleBody
+
+
+
+
+################################################################################################
+# Check if object is not visible, if yes then invoke ruleBody
+# e.g.
+# | if banner is not visible
+#     | title is above abstract
+################################################################################################
+@rule if %{objectName} is not visible
+    @if ${!isVisible(objectName)}
+        @ruleBody
+
+
+
+################################################################################################
+# Check if object is present, if yes then invoke ruleBody
+# e.g.
+# | if banner is present
+#     | banner is above abstract
+################################################################################################
+@rule if %{objectName} is present
+    @if ${isPresent(objectName)}
+        @ruleBody
+
+
+
+################################################################################################
+# Check if object is present, if yes then invoke ruleBody
+# e.g.
+# | if banner is present
+#     | banner is above abstract
+################################################################################################
+@rule if %{objectName} is not present
+    @if ${!isPresent(objectName)}
+        @ruleBody
+
+
+
+
+################################################################################################
+# Check that elements are organised in 2 columns of equal size
+# e.g.
+#   | collection-cards should be displayed in 2 columns in main
+################################################################################################
+@rule %{objectPattern} should be displayed in 2 columns in %{container}
+    @forEach [${objectPattern}] as item
+        ${item}:
+            width 45 to 50% of ${container}/width
+
+
+
+################################################################################################
+# Check that elements are organised in 3 columns of equal size
+# e.g.
+#   | collection-cards should be displayed in 3 columns in main
+################################################################################################
+@rule %{objectPattern} should be displayed in 3 columns in %{container}
+    @forEach [${objectPattern}] as item
+        ${item}:
+            width 31 to 33% of ${container}/width
+
+
+
+################################################################################################
+# Check that elements are organised in 3 columns of equal size within parent element which has padding
+# padding element in rule is needed as the content is centered on the page but galen width includes padding
+# e.g.
+#   | collection-cards should be displayed in 3 columns in main with 20% padding
+################################################################################################
+@rule %{objectPattern} should be displayed in 3 columns in %{container} with %{percent}% padding
+    @forEach [${objectPattern}] as item
+        ${item}:
+            @set columnWidth     ${(33-((2*percent)/3))}
+            width ~ ${columnWidth} % of ${container}/width
+
+
+
+################################################################################################
+# Check that elements are organised in 4 columns of equal size
+# e.g.
+#   | collection-cards should be displayed in 4 columns in main
+################################################################################################
+@rule %{objectPattern} should be displayed in 4 columns in %{container}
+    @forEach [${objectPattern}] as item
+        ${item}:
+            width 22 to 25% of ${container}/width
+
+
+
+################################################################################################
+# Check elements are stacked and vertically aligned all
+# e.g.
+#   | home_box_* should be displayed in 1 column
+################################################################################################
+@rule %{objectPattern} should be displayed in 1 column
+    @forEach [${objectPattern}] as item, next as nextItem
+        ${item}:
+            aligned vertically all ${nextItem}
+            above ${nextItem}
+
+
+
+################################################################################################
+# Check elements are stacked and vertically aligned all
+# e.g.
+#   | home_box_* should be displayed in 1 column
+################################################################################################
+@rule %{objectPattern} should be displayed in 1 column and vertically aligned %{edge}
+    @forEach [${objectPattern}] as item, next as nextItem
+        ${item}:
+            aligned vertically ${edge} ${nextItem}
+
+
+################################################################################################
+# Check object is shown below previous object
+# e.g.
+#   | headline should be below result-1
+################################################################################################
+@rule %{object} should be below %{previousObject}
+    ${object}:
+        below ${previousObject} > ${NO_MARGIN}
+
+
+
+################################################################################################
+# Check two objects are stacked and vertically aligned (all, left, right, centered)
+# e.g.
+#   | headline should be below result-1 and vertically aligned left
+################################################################################################
+@rule %{object} should be below %{nextObject} and vertically aligned %{edge}
+    ${object}:
+        below ${nextObject}
+        aligned vertically ${edge} ${nextObject}
+
+
+################################################################################################
+# Check two objects are stacked and vertically aligned (all, left, right, centered)
+# e.g.
+#   | headline should be below result-1 and vertically aligned left
+################################################################################################
+@rule %{object} should be below %{nextObject} and vertically aligned %{edge} with %{offset} offset
+    ${object}:
+        below ${nextObject}
+        aligned vertically ${edge} ${nextObject} ${offset}
+
+
+
+################################################################################################
+# Check object is shown above next object
+# e.g.
+#   | headline should be above result-1
+################################################################################################
+@rule %{object} should be above %{nextObject}
+    ${object}:
+        above ${nextObject} > ${NO_MARGIN}
+
+
+
+################################################################################################
+# Check two objects are stacked and vertically aligned (all, left, right, centered)
+# e.g.
+#   | headline should be above result-1 and vertically aligned left
+################################################################################################
+@rule %{object} should be above %{nextObject} and vertically aligned %{edge}
+    ${object}:
+        above ${nextObject}
+        aligned vertically ${edge} ${nextObject}
+
+
+
+################################################################################################
+# Check two objects are next to each other and horizontally aligned (all, top, bottom, centered)
+# e.g.
+#   | headline should be left of result-1 and horizontally aligned top
+################################################################################################
+@rule %{object} should be left of %{nextObject} and horizontally aligned %{edge}
+    ${object}:
+        left-of ${nextObject}
+        aligned horizontally ${edge} ${nextObject}
+
+
+
+################################################################################################
+# Check two objects are next to each other and horizontally aligned (all, top, bottom, centered)
+# e.g.
+#   | headline should be left of result-1 and horizontally aligned top 1px
+################################################################################################
+@rule %{object} should be left of %{nextObject} and horizontally aligned %{edge} with %{offset} offset
+    ${object}:
+        left-of ${nextObject}
+        aligned horizontally ${edge} ${nextObject} ${offset}
+
+
+
+################################################################################################
+# Check two objects are next to each other
+# e.g.
+#   | headline should be left of result-1
+################################################################################################
+@rule %{object} should be left of %{nextObject}
+    ${object}:
+        left-of ${nextObject} > ${NO_MARGIN}
+
+
+
+################################################################################################
+# Check two objects are next to each other
+# e.g.
+#   | headline should be right of result-1
+################################################################################################
+@rule %{object} should be right of %{nextObject}
+    ${object}:
+        right-of ${nextObject} > ${NO_MARGIN}
+
+
+
+
+################################################################################################
+# Check two objects are next to each other and horizontally aligned (all, top, bottom, centered)
+# e.g.
+#   | headline should be right of result-1 and horizontally aligned top
+################################################################################################
+@rule %{object} should be right of %{nextObject} and horizontally aligned %{edge}
+    ${object}:
+        right-of ${nextObject}
+        aligned horizontally ${edge} ${nextObject}
+
+
+
+################################################################################################
+# Check two objects are next to each other and horizontally aligned (all, top, bottom, centered)
+# e.g.
+#   | headline should be right of result-1 and horizontally aligned top 1px
+################################################################################################
+@rule %{object} should be right of %{nextObject} and horizontally aligned %{edge} with %{offset} offset
+    ${object}:
+        right-of ${nextObject}
+        aligned horizontally ${edge} ${nextObject} ${offset}
+
+
+
+################################################################################################
+# Check objects is between two objects
+# e.g.
+#   | accepted-manuscript should be between pdf-button and citation-button
+################################################################################################
+@rule %{object} should be between %{topObject} and %{bottomObject}
+    ${object}:
+        below ${topObject}
+        above ${bottomObject}
+
+
+
+################################################################################################
+# Check text for object
+# e.g.
+#   | button should have text "Click me"
+################################################################################################
+@rule %{object} should have text %{text}
+    ${object}:
+        text is ${text}
+
+
+################################################################################################
+# Check elements are displayed next to each other and horizontally aligned
+# e.g.
+#
+#   | home_box_* should be displayed next to each other and horizontally aligned
+################################################################################################
+@rule %{objectPattern} should be displayed next to each other and horizontally aligned
+    @forEach [${objectPattern}] as item, next as nextItem
+        ${item}:
+            aligned horizontally all ${nextItem}
+            left-of ${nextItem} > ${NO_MARGIN}
+
+
+################################################################################################
+# Check element has given height
+# e.g.
+# | banner should have height 230px
+################################################################################################
+@rule %{object} should have height %{height}
+    ${object}:
+        height ${height}
+
+
+################################################################################################
+# Check element has given width
+# e.g.
+# | banner should have width 230px
+################################################################################################
+@rule %{object} should have width %{width}
+    ${object}:
+        width ${width}
+
+
+
+################################################################################################
+# Check element is horizontally centered inside another element
+# e.g.
+# | button should be centered horizontally inside screen
+################################################################################################
+@rule %{object} should be centered horizontally inside %{box}
+    ${object}:
+        centered horizontally inside ${box}

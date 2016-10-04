@@ -1,0 +1,34 @@
+@import common.gspec
+@import rules/rules.gspec
+
+@objects
+    headline            h1
+    social-nav          div.social-sharing
+    social-nav-item-*   ul.shareaholic-share-buttons li
+    article-container   #flowing-insights-articles-container
+    article-card-*      div.spec-insight-card
+    more-button         #show-more-insights div div a
+
+    
+= Insights content header section =
+
+    | headline should have text "SOFTWARE TESTING"
+    | headline should be between priority-nav and social-nav
+    | social-nav-item-* should be displayed next to each other and horizontally aligned
+    | social-nav should be above article-container
+
+
+= Insights Article section =
+    article-card-*:
+        component components/article-card.gspec
+    @on desktop
+        | article-card-* should be displayed in 3 columns in article-container
+    @on tablet
+        | article-card-* should be displayed in 2 columns in article-container
+    @on mobile
+        | article-card-* should be displayed in 1 column
+    | more-button should be below article-container
+
+
+
+

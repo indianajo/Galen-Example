@@ -1,0 +1,22 @@
+@import ../rules/rules.gspec
+
+@objects
+    featured        p.insight-card__category
+    date            p.insight-card__date
+    title           h3.insight-card__title
+    author          p.insight-card__author
+    author-image    span.insight-card__authors
+    author-name     span.insight-card__author-name
+
+= Article cards section =
+
+    author:
+        "line between title and author" css border-top-width is "1px"
+    | if featured is present
+        | date should not be visible
+        | title should be below featured and vertically aligned left with 25px offset
+    | if featured is not present
+        | date should be visible
+        | date should be above title and vertically aligned left
+    | title should be above author and vertically aligned left
+    | author-name should be right of author-image and horizontally aligned top
