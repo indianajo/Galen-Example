@@ -20,4 +20,3 @@ $galen.registerDevice("tablet-f", inSeleniumGrid($grid, "tablet firefox", ["tabl
 $galen.registerDevice("mobile-c", inSeleniumGrid($grid, "mobile chrome", ["mobile"], {size: "322x568",browser: "chrome"}));
 $galen.registerDevice("mobile-f", inSeleniumGrid($grid, "mobile firefox", ["mobile"], {size: "322x568",browser: "firefox"}));
 */
-//$galen.devices.tablet.sizeRange = ["840x480", "1449x768"];
