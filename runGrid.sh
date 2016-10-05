@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 docker-compose up -d
-galen test tests/ --htmlreport reports
+galen test tests/ --htmlreport report

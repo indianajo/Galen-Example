@@ -1,1 +1,5 @@
-# Created by .ignore support plugin (hsz.mobi)
+*.iml
+/.idea/
+/report/
+/Galen-Example.iml
+.DS_Store

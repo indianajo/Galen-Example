@@ -8,7 +8,8 @@ $grid = "http://localhost:4444/wd/hub";
 $galen.settings.website = $prod;
 
 
-$galen.registerDevice("mobile", inLocalBrowser("mobile emulation", "322x568", ["mobile"], "chrome"));
+$galen.registerDevice("mobile-c", inLocalBrowser("mobile emulation", "322x568", ["mobile"], "chrome"));
+$galen.registerDevice("mobile-f", inLocalBrowser("mobile emulation", "322x568", ["mobile"]));
 $galen.registerDevice("tablet", inLocalBrowser("tablet emulation", "620x540", ["tablet"], "chrome"));
 $galen.registerDevice("desktop", inLocalBrowser("desktop emulation", "1450x800", ["desktop"], "chrome"));
 
