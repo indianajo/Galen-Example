@@ -1,0 +1,50 @@
+@import common.gspec
+
+@objects
+    headline            h1
+    social-nav          div.social-sharing
+    social-nav-item-*   ul.shareaholic-share-buttons li
+    article-container   #flowing-insights-articles-container
+    article-card-*      div.spec-insight-card
+    more-button         #show-more-insights div div a
+
+
+= Insights content header section =
+
+    headline:
+        text is "SOFTWARE TESTING"
+        below priority-nav
+        above social-nav
+
+    social-nav:
+        above article-container
+
+    @forEach [social-nav-item-*] as item, next as nextItem
+        ${item}:
+            aligned horizontally all ${nextItem}
+            left-of ${nextItem}
+
+= Insights Article section =
+    article-card-*:
+        component components/article-card01.gspec
+
+    @on desktop
+        @forEach [article-card-*] as item
+            ${item}:
+                width 31 to 33% of article-container/width
+    @on tablet
+        @forEach [article-card-*] as item
+            ${item}:
+                width 45 to 50% of article-container/width
+    @on mobile
+        @forEach [article-card-*] as item, next as nextItem
+            ${item}:
+                aligned vertically all ${nextItem}
+                above ${nextItem}
+
+    more-button:
+        below article-container >= -1px
+
+= Article cards section =
+    article-card-*:
+        component components/article-card01.gspec

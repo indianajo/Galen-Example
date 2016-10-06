@@ -1,0 +1,33 @@
+@import ../rules/rules.gspec
+
+@objects
+    featured        p.insight-card__category
+    date            p.insight-card__date
+    title           h3.insight-card__title
+    author          p.insight-card__author
+    author-image    span.insight-card__authors
+    author-name     span.insight-card__author-name
+
+= Article cards section =
+
+    author:
+        "line between title and author" css border-top-width is "1px"
+
+    @if ${isPresent("featured")}
+        date:
+            absent
+        title:
+            below featured
+            aligned vertically left title 25px
+    @if ${!isPresent("featured")}
+        date:
+            visible
+            above title
+            aligned vertically left title
+        title:
+            above author
+            aligned vertically left author
+
+    author-name:
+        right-of author-image
+        aligned horizontally top author-image
