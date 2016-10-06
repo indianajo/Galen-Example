@@ -17,14 +17,16 @@ To increase the testing speed when checking all pages simply create a round trip
 ## How to use it
 
 To run the tests locally set the test environment in init.js to local. Run a test with the following command:
+
 `galen test tests/insights.test.js --htmlreport report -Dwebdriver.chrome.driver=%PATH_TO_YOUR_CHROMEDRIVER%`
 
 To run the tests in Firefox change the device setup in the init.js by removing "chrome":
+
 `$galen.registerDevice("mobile", inLocalBrowser("mobile emulation", "320x568", ["mobile"]));`
 
 After the test has finished you should find a file called report.html in the report folder. Open it to see the test report.
 
-## Selenium Grid
+## Selenium Grid with Docker
 
 An example configuration for running tests in selenium grid is available in the init.js. Simply comment out the local browser device registration
 and uncomment the selenium grid device registration.
@@ -56,3 +58,11 @@ Go to http://localhost:4444/grid/console and check grid and nodes are there
 If more nodes are needed run: `docker-compose scale firefox=3`
 To run tests in parallel add the `--parallel-tests 3` to the command line call or add it to run.sh
 
+
+# Run on real mobile device with Appium
+
+You can run the tests on a real mobile device. The init.js file includes an example for registering a device.
+
+`$galen.registerDevice("mobile-android-c", inSeleniumGrid($gridAppium, "real mobile Android", ["mobile"], {desiredCapabilities:{browserName: "Chrome", platformName: "Android",deviceName:"Sony Mobile", bundleId:"com.android.chrome"}}));`
+
+To run this example, install Android Studio and appium. Get the device identifier, start the appium server for your device and run the test.
