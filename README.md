@@ -59,7 +59,7 @@ If more nodes are needed run: `docker-compose scale firefox=3`
 To run tests in parallel add the `--parallel-tests 3` to the command line call or add it to run.sh
 
 
-# Run on real mobile device with Appium
+# Run on real mobile device with Appium (under construction)
 
 You can run the tests on a real mobile device. The init.js file includes an example for registering a device.
 
