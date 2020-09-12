@@ -3,19 +3,18 @@
 
 @objects
     headline            h1
-    social-nav          div.social-sharing
-    social-nav-item-*   ul.shareaholic-share-buttons li
+    insights-topic-nav  div.insights-topics-navigation
     article-container   #flowing-insights-articles-container
     article-card-*      div.spec-insight-card
     more-button         #show-more-insights div div a
 
+
     
 = Insights content header section =
 
-    | headline should have text "SOFTWARE TESTING"
-    | headline should be between priority-nav and social-nav
-    | social-nav-item-* should be displayed next to each other and horizontally aligned
-    | social-nav should be above article-container
+    | headline should have text "Software Testing"
+    | headline should be below insights-topic-nav
+
 
 
 = Insights Article section =
