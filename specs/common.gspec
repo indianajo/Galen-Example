@@ -11,6 +11,8 @@
     priority-nav            div.priority-navigation
     all-topics              div.all_topics
     channels                div.channels_nav--top-channels
+    social-nav              div.social--icons
+    social-nav-item-*       a.footer-new__icon
 
 
 
@@ -32,5 +34,8 @@
         | channels should not be visible
         | all-topics should be centered horizontally inside screen
 
+
+= Footer section =
+    | social-nav-item-* should be displayed next to each other and horizontally aligned
 
     
