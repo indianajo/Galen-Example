@@ -4,12 +4,12 @@
 @objects
     navbar                  div.navbar
     main-nav                div.main-menu
-    mobile-nav              div.mobile-header
+    mobile-nav              #mobile-menu-title
     logo                    a.header__logo
     main-nav-menu           ul.header__menu
     main-nav-menu-item-*    ul.header__menu li
     priority-nav            div.priority-navigation
-    all-topics              div.all_topics
+    all-topics              div.topics-navigation
     channels                div.channels_nav--top-channels
     social-nav              div.social--icons
     social-nav-item-*       a.footer-new__icon
@@ -29,7 +29,7 @@
         | navbar should not be visible
         | main-nav should not be visible
         | mobile-nav should be visible
-        | mobile-nav should be above priority-nav
+        | mobile-nav should be above all-topics
     @on mobile
         | channels should not be visible
         | all-topics should be centered horizontally inside screen
